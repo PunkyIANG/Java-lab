@@ -1,6 +1,8 @@
 import java.util.Random;
 import java.io.*;
 
+//TODO: rewrite (or replace) nrCopii so it is equal to state.length 
+
 class Carte {
     private float pret;
     private String denumire;
@@ -49,7 +51,7 @@ class Carte {
             nrCopii = (Integer.valueOf(box.readLine())).intValue();
             state = new int[(Integer.valueOf(box.readLine())).intValue()];
 
-            for(int i = 0; i < state.length; i++) {
+            for (int i = 0; i < state.length; i++) {
                 state[i] = (Integer.valueOf(box.readLine())).intValue();
             }
             nrCarti++;
@@ -71,7 +73,7 @@ class Carte {
         for (int i = 0; i < state.length; i++) {
             result += state[i] + "\n";
         }
-        
+
         return result;
     }
 
@@ -83,7 +85,7 @@ class Carte {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            
+
             byte b[] = Serialize().getBytes();
 
             fileOutputStream.write(b);
@@ -132,11 +134,22 @@ class Carte {
     }
 
     public int getState(int id) {
-        return state[id];
+        if (id >= 0 && id < state.length) {
+            return state[id];
+        }
+
+        System.out.println("Shit's fucked man");
+        System.out.println("Requested invalid id at ***.getState");
+        return -1;
     }
 
     public void setState(int id, int state) {
-        this.state[id] = state;
+        if (id >= 0 && id < this.state.length) {
+            this.state[id] = state;
+        } else {
+            System.out.println("Shit's fucked man");
+            System.out.println("Set invalid id at ***.setState");    
+        }
     }
 
     public void Print() {

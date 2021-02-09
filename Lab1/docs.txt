@@ -1,0 +1,4 @@
+in java apelarea la elementul clasei se face de la numele unitatii de la care depinde
+    valoarea elementului clasei curent:
+     - apelare la static se face de la numele clasei
+     - apelarea la nestatic se face de la numele obiectului

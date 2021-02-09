@@ -11,6 +11,8 @@ public class Main {
             new Carte(),
             new Carte()
         };
+
+        customCarte.setState(1, 0);
         biblioteca[3].Randomize();
         biblioteca[4].Randomize();
 
@@ -49,7 +51,5 @@ public class Main {
         for (int i = 0; i < biblioteca.length; i++) {
             biblioteca[i].SaveToFile("books/" + biblioteca[i].getDenumire() + ".txt");
         }
-
-
     }
 }
