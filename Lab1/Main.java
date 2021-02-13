@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Carte defaultCarte = new Carte();
-        Carte customCarte = new Carte(150f, "The Catcher in the Rye", "J. D. Salinger", 1000, new int[] {5,7,3,4,1});
+        Carte customCarte = new Carte(150f, "The Catcher in the Rye", "J. D. Salinger", 5, new int[] {5,7,3,4,1});
         Carte copyCarte = new Carte(customCarte);
 
         Carte biblioteca[] = new Carte[] {
@@ -13,7 +13,7 @@ public class Main {
         };
 
         customCarte.setState(1, 0);
-        biblioteca[3].Randomize();
+        biblioteca[3].Edit();
         biblioteca[4].Randomize();
 
         for (int i = 0; i < biblioteca.length; i++) {
@@ -36,9 +36,9 @@ public class Main {
         System.out.println("Pret total: " + totalPrice);
         System.out.println();
 
-        Carte mostUsed = new Carte();
+        Carte mostUsed = null;  //nu folosim new Carte() ca sa nu marim nrCarti cu inca o unitate
         for (int i = 0; i < biblioteca.length; i++) {
-            if (mostUsed.CompareIntrebuintare(biblioteca[i]) < 0) {
+            if (mostUsed == null || mostUsed.CompareIntrebuintare(biblioteca[i]) < 0) {
                 mostUsed = biblioteca[i];
             }
         }

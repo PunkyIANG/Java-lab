@@ -1,8 +1,6 @@
 import java.util.Random;
 import java.io.*;
 
-//TODO: rewrite (or replace) nrCopii so it is equal to state.length 
-
 class Carte {
     private float pret;
     private String denumire;
@@ -16,20 +14,26 @@ class Carte {
         pret = -1f;
         denumire = "---";
         autor = "---";
-        nrCopii = -1;
+        nrCopii = 0;
 
         nrCarti++;
-        state = new int[0];
+        state = new int[nrCopii];
     }
 
     public Carte(float pret, String denumire, String autor, int nrCopii, int state[]) {
         this.pret = pret;
         this.denumire = denumire;
         this.autor = autor;
-        this.nrCopii = nrCopii;
-
         nrCarti++;
-        this.state = state;
+        
+        if (nrCopii == state.length) {
+            this.nrCopii = nrCopii;
+            this.state = state;
+        } else {
+            System.out.println("WARNING: nrCopii != state.length, reseting to 0");
+            this.nrCopii = 0;
+            this.state = new int[this.nrCopii];
+        }
     }
 
     public Carte(Carte copy) {
@@ -38,7 +42,7 @@ class Carte {
         this.autor = copy.getAutor();
         this.nrCopii = copy.getNrCopii();
         nrCarti++;
-        this.state = copy.state.clone();
+        this.state = copy.getStateArray();
     }
 
     public Carte(String path) {
@@ -49,9 +53,9 @@ class Carte {
             denumire = box.readLine();
             autor = box.readLine();
             nrCopii = (Integer.valueOf(box.readLine())).intValue();
-            state = new int[(Integer.valueOf(box.readLine())).intValue()];
+            state = new int[nrCopii];
 
-            for (int i = 0; i < state.length; i++) {
+            for (int i = 0; i < nrCopii; i++) {
                 state[i] = (Integer.valueOf(box.readLine())).intValue();
             }
             nrCarti++;
@@ -69,8 +73,7 @@ class Carte {
         result += denumire + "\n";
         result += autor + "\n";
         result += nrCopii + "\n";
-        result += state.length + "\n";
-        for (int i = 0; i < state.length; i++) {
+        for (int i = 0; i < nrCopii; i++) {
             result += state[i] + "\n";
         }
 
@@ -152,6 +155,15 @@ class Carte {
         }
     }
 
+    public int[] getStateArray() {
+        return state.clone();
+    }
+
+    public void setStateArray(int[] state) {
+        nrCopii = state.length;
+        this.state = state.clone();
+    }
+
     public void Print() {
         System.out.println("Pret: " + pret);
         System.out.println("Denumire: " + denumire);
@@ -178,9 +190,7 @@ class Carte {
 
         System.out.print("Dati nr. copii: ");
         nrCopii = Helper.InputInt();
-
-        System.out.println("Dati starea cator carti este verificata");
-        state = new int[Helper.InputInt()];
+        state = new int[nrCopii];
 
         for (int i = 0; i < state.length; i++) {
             System.out.println("Dati starea cartii " + i + ": ");
@@ -200,11 +210,11 @@ class Carte {
         pret = randomizer.nextFloat() * 100;
         denumire = titles[randomizer.nextInt(titles.length)];
         autor = names[randomizer.nextInt(names.length)];
-        nrCopii = randomizer.nextInt(1000);
-        state = new int[randomizer.nextInt(10)];
+        nrCopii = randomizer.nextInt(10);
+        state = new int[nrCopii];
 
         for (int i = 0; i < state.length; i++) {
-            state[i] = randomizer.nextInt(10);
+            state[i] = randomizer.nextInt(10) + 1;
         }
     }
 

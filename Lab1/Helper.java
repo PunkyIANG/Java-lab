@@ -15,6 +15,8 @@ public class Helper {
         return str;
     }
 
+    //add some validation over here
+
     public static int InputInt() { 
         return (Integer.valueOf(InputString())).intValue();
     }

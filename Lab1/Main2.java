@@ -21,9 +21,9 @@ public class Main2 {
         System.out.println("Pret total: " + totalPrice);
         System.out.println();
 
-        Carte mostUsed = new Carte();
+        Carte mostUsed = null;  //nu folosim new Carte() ca sa nu marim nrCarti cu inca o unitate
         for (int i = 0; i < biblioteca.length; i++) {
-            if (mostUsed.CompareIntrebuintare(biblioteca[i]) < 0) {
+            if (mostUsed == null || mostUsed.CompareIntrebuintare(biblioteca[i]) < 0) {
                 mostUsed = biblioteca[i];
             }
         }
