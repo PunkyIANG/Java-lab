@@ -13,7 +13,7 @@ public class Main {
         };
 
         customCarte.setState(1, 0);
-        biblioteca[3].Edit();
+        biblioteca[3].Deserialize(biblioteca[1].Serialize());
         biblioteca[4].Randomize();
 
         for (int i = 0; i < biblioteca.length; i++) {

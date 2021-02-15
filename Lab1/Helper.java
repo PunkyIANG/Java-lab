@@ -9,19 +9,45 @@ public class Helper {
             str = box.readLine();
         } catch (Exception e) {
             System.out.println("Shit's fucked man");
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
 
         return str;
     }
 
-    //add some validation over here
+    public static int InputInt() {
+        boolean success = false;
+        int result = 0;
 
-    public static int InputInt() { 
-        return (Integer.valueOf(InputString())).intValue();
+        do {
+            try {
+                result = (Integer.valueOf(InputString())).intValue();
+                success = true;
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.print("Dati valoarea inca o data: ");
+                success = false;
+            }
+        } while (!success);
+
+        return result;
     }
 
-    public static float InputFloat() { 
-        return (Float.valueOf(InputString())).floatValue();
+    public static float InputFloat() {
+        boolean success = false;
+        float result = 0;
+
+        do {
+            try {
+                result = (Float.valueOf(InputString())).floatValue();
+                success = true;
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.print("Dati valoarea inca o data: ");
+                success = false;
+            }
+        } while (!success);
+
+        return result;
     }
 }

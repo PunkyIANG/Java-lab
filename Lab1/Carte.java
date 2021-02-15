@@ -25,7 +25,7 @@ class Carte {
         this.denumire = denumire;
         this.autor = autor;
         nrCarti++;
-        
+
         if (nrCopii == state.length) {
             this.nrCopii = nrCopii;
             this.state = state;
@@ -63,9 +63,11 @@ class Carte {
             box.close();
         } catch (Exception e) {
             System.out.println("Shit's fucked man");
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
+
+    // TODO: deserialize
 
     public String Serialize() {
         String result = "";
@@ -78,6 +80,21 @@ class Carte {
         }
 
         return result;
+    }
+
+    public void Deserialize(String params) {
+        String[] parts = params.split("\n");
+
+        setPret((Float.valueOf(parts[0])).floatValue());
+        setDenumire(parts[1]);
+        setAutor(parts[2]);
+        setNrCopii((Integer.valueOf(parts[3])).intValue());
+
+        for (int i = 0; i < nrCopii; i++) {
+            setState(i, (Integer.valueOf(parts[4 + i])).intValue());
+        }
+
+        nrCarti++;
     }
 
     public void SaveToFile(String path) {
@@ -96,7 +113,7 @@ class Carte {
             fileOutputStream.close();
         } catch (Exception e) {
             System.out.println("Shit's fucked man");
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 
@@ -105,6 +122,10 @@ class Carte {
     }
 
     public void setPret(float pret) {
+        if (pret < 0f) {
+            System.out.println("ERROR: negative price given at setPret");
+            throw new RuntimeException();
+        }
         this.pret = pret;
     }
 
@@ -129,7 +150,30 @@ class Carte {
     }
 
     public void setNrCopii(int nrCopii) {
+        if (nrCopii < 0) {
+            System.out.println("ERROR: negative nrCopii given");
+            throw new RuntimeException();
+        }
+
+        if (nrCopii == this.nrCopii) {
+            System.out.println("WARNING: nrcopii == this.nrCopii, no changes");
+            return;
+        }
+
+        int minCount = nrCopii < this.nrCopii ? nrCopii : this.nrCopii;
+
+        int temp[] = new int[this.nrCopii];
+
+        for (int i = 0; i < this.nrCopii; i++) {
+            temp[i] = state[i];
+        }
+
+        state = new int[nrCopii];
         this.nrCopii = nrCopii;
+
+        for (int i = 0; i < minCount; i++) {
+            state[i] = temp[i];
+        }
     }
 
     public static int getNrCarti() {
@@ -148,10 +192,14 @@ class Carte {
 
     public void setState(int id, int state) {
         if (id >= 0 && id < this.state.length) {
+            if (state > 10 || state < 0) {
+                System.out.println("Set invalid state at ***.setState, value must be in [0,10]");
+                throw new RuntimeException();
+            }
             this.state[id] = state;
         } else {
-            System.out.println("Shit's fucked man");
-            System.out.println("Set invalid id at ***.setState");    
+            System.out.println("Set invalid id at ***.setState");
+            throw new RuntimeException();
         }
     }
 
@@ -180,21 +228,51 @@ class Carte {
 
     public void Edit() {
         System.out.print("Dati pretul: ");
-        pret = Helper.InputInt();
+
+        boolean success = false;
+        do {
+            try {
+                setPret(Helper.InputFloat());
+                success = true;
+            } catch (Exception e) {
+                System.out.println(e);
+                success = false;
+            }
+        } while (!success);
 
         System.out.print("Dati denumirea: ");
-        denumire = Helper.InputString();
+        setDenumire(Helper.InputString());
 
         System.out.print("Dati autorul: ");
-        autor = Helper.InputString();
+        setAutor(Helper.InputString());
 
         System.out.print("Dati nr. copii: ");
-        nrCopii = Helper.InputInt();
-        state = new int[nrCopii];
+
+        success = false;
+        do {
+            try {
+                setNrCopii(Helper.InputInt());
+                success = true;
+            } catch (Exception e) {
+                System.out.println(e);
+                success = false;
+            }
+        } while (!success);
 
         for (int i = 0; i < state.length; i++) {
             System.out.println("Dati starea cartii " + i + ": ");
-            state[i] = Helper.InputInt();
+
+            success = false;
+            do {
+                try {
+                    setState(i, Helper.InputInt());
+                    success = true;
+                } catch (Exception e) {
+                    System.out.println(e);
+                    success = false;
+                }
+            } while (!success);
+
         }
     }
 

@@ -13,8 +13,8 @@ public class Main2 {
         System.out.println();
 
         float totalPrice = 0f;
+
         for (int i = 0; i < biblioteca.length; i++) {
-            System.out.println(i);
             totalPrice += biblioteca[i].PretTotal();
         }
 
