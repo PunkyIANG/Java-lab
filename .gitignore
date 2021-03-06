@@ -24,3 +24,11 @@ hs_err_pid*
 
 *.md
 *.pdf
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
