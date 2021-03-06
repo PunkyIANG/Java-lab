@@ -9,6 +9,6 @@ package laborator.pkg2;
  *
  * @author Professional
  */
-public class Imp extends Demon implements IMelee, IRanged{
+public class Mancubus extends Demon implements IRanged {
     
 }

@@ -9,6 +9,6 @@ package laborator.pkg2;
  *
  * @author Professional
  */
-public class Pinky extends Demon {
+public class Pinky extends Demon implements IMelee {
     
 }
