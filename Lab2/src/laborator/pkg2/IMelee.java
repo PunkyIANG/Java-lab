@@ -10,5 +10,5 @@ package laborator.pkg2;
  * @author Professional
  */
 public interface IMelee {
-    
+    public void MeleeAttack(Entity target);
 }

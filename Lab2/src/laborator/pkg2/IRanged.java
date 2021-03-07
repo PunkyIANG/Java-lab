@@ -10,5 +10,5 @@ package laborator.pkg2;
  * @author Professional
  */
 public interface IRanged {
-    
+    public void RangedAttack(Entity target);
 }
