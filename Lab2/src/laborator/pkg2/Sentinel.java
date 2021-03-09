@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package laborator.pkg2;
 
-/**
- *
- * @author Professional
- */
 public abstract class Sentinel extends Entity implements IMelee, IRanged {
 
     public Sentinel() {
+        super();
+        
         hitPoints = 60 + Helper.randomizer.nextInt(20);
+    }
+    
+    public Sentinel(int hitPoints) {
+        super(hitPoints);
     }
     
     public void Attack(Entity target) {
@@ -28,5 +25,11 @@ public abstract class Sentinel extends Entity implements IMelee, IRanged {
     public final boolean InstaKill() {
         //immune to instakill
         return false;
+    }
+    
+    public void PrintStats() {
+        super.PrintStats();
+        
+        Helper.print(" sentinel ");
     }
 }

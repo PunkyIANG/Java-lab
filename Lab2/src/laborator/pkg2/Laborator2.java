@@ -1,21 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package laborator.pkg2;
 
-/**
- *
- * @author Professional
- */
 public class Laborator2 {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Entity[] entities = new Entity[] {
+            new DoomSlayer(),
+            new Marauder(60, null),
+            new Wolf(),
+            new Marauder()
+        };
+        
+        entities[0].KbInput();
+        // entities[3] = Helper.gson.fromJson(entities[0].Serialize(), DoomSlayer.class);
+        entities[3] = Helper.gson.fromJson(Helper.FileRead("0.json"), DoomSlayer.class);
+        
+        for (int i = 0; i < entities.length; i++) {
+            entities[i].PrintStats();
+            Helper.println("");
+        }
+        
+        for (int i = 0; i < entities.length; i++) {
+            if (entities[i] instanceof Marauder && ((Marauder)entities[i]).summonedWolf == null) {
+                ((Marauder)entities[i]).SummonWolf();
+            }
+        }
+        
+        Helper.println("");
+        
+        for (int i = 0; i < entities.length; i++) {
+            entities[i].PrintStats();
+            Helper.println("");
+        }
+        
+        IRanged[] ranged = new IRanged[entities.length];
+        Helper.println("");
+        
+        for (int i = 0; i < entities.length; i++) {
+            if (entities[i] instanceof IRanged) {
+                ranged[i] = ((IRanged)entities[i]);
+            } else {
+                ranged[i] = new Marauder();
+            }
+            
+            if (ranged[i] instanceof DoomSlayer) {
+                ((DoomSlayer)ranged[i]).BloodPunch((DoomSlayer)ranged[i]);
+                ((DoomSlayer)ranged[i]).PrintStats();
+                Helper.println("");
+            } else if (ranged[i] instanceof Marauder) {
+                ((Marauder)ranged[i]).SummonWolf();
+                ((Marauder)ranged[i]).PrintStats();
+                Helper.println("");
+            }
+        }
+        
+        for (int i = 0; i < entities.length; i++) {
+            Helper.FileWrite(i + ".json", entities[i].Serialize());
+        }
+        
+        
+        
+        
     }
     
 }

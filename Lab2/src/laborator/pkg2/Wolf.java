@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package laborator.pkg2;
 
-/**
- *
- * @author Professional
- */
 public class Wolf extends Entity implements IMelee {
     
     int nullHowlCount;
     
     public Wolf() {
-        hitPoints = 20 + Helper.randomizer.nextInt(20);
+        super();
         nullHowlCount = 1 + Helper.randomizer.nextInt(3);
+    }
+    
+    public Wolf(int hitPoints, int nullHowlCount) {
+        super(hitPoints);
+        
+        this.nullHowlCount = nullHowlCount;
     }
     
     public void Attack(Entity target) {
@@ -49,4 +46,18 @@ public class Wolf extends Entity implements IMelee {
         
         //the wolf can nullify some attacks, then it sacrifices itself to protect
     }
+    
+    public void KbInput() {
+        super.KbInput();
+        
+        Helper.print("Null howl count: ");
+        nullHowlCount = Helper.InputIntLimit(0);
+    }
+    
+    public void PrintStats() {
+        super.PrintStats();
+        Helper.print("Wolf " + nullHowlCount + " null howl(s) ");
+    }
+    
+    
 }

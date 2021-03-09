@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package laborator.pkg2;
 
-/**
- *
- * @author Professional
- */
 public class Marauder extends Sentinel {
 
     public Wolf summonedWolf;
-    
+
     public Marauder() {
         super();
-        
+
         if (Helper.randomizer.nextBoolean()) {
             SummonWolf();
         }
+    }
+    
+    public Marauder(int hitPoints, Wolf summonedWolf) {
+        super(hitPoints);
+        
+        this.summonedWolf = summonedWolf;
     }
 
     public void MeleeAttack(Entity target) {
@@ -44,16 +41,34 @@ public class Marauder extends Sentinel {
         //if enemy is too far then shield is triggered
     }
 
-    public Wolf SummonWolf() {
+    public void SummonWolf() {
 
         if (summonedWolf == null
                 || !summonedWolf.IsAlive()) {
             summonedWolf = new Wolf();
-            return summonedWolf;
-        } else {
-            return null;
         }
+    }
 
+    public void KbInput() {
+        super.KbInput();
+
+        Helper.print("Initialize wolf? true/false: ");
+        boolean initWolf = Boolean.valueOf(Helper.InputString());
+
+        if (initWolf) {
+            summonedWolf = new Wolf();
+            summonedWolf.KbInput();
+        }
+    }
+    
+    public void PrintStats() {
+        super.PrintStats();
+        
+        Helper.print(" marauder ");
+        
+        if (summonedWolf != null) {
+            summonedWolf.PrintStats();
+        }
     }
 
 }

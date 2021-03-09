@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package laborator.pkg2;
-/**
- *
- * @author Professional
- */
+
 public abstract class Entity {
     public int hitPoints;
+    
+    public Entity() {
+        hitPoints = 20 + Helper.randomizer.nextInt(20);
+    }
+    
+    public Entity(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
     
     public abstract void Attack(Entity target);
     
@@ -28,5 +28,14 @@ public abstract class Entity {
     
     public String Serialize() {
         return Helper.gson.toJson(this);
+    }
+    
+    public void KbInput() {
+        Helper.print("Hit points: ");
+        hitPoints = Helper.InputIntLimit(0);
+    }
+    
+    public void PrintStats() {
+        Helper.print("Entity " + hitPoints + " hp ");
     }
 }
