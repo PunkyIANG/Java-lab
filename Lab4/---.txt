@@ -1,0 +1,1 @@
+{"pret":-1.0,"denumire":"---","autor":"---","state":[]}

@@ -1,0 +1,1 @@
+{"pret":150.0,"denumire":"The Catcher in the Rye","autor":"J. D. Salinger","state":[{"state":7,"hasAutograph":false},{"state":1,"hasAutograph":false},{"state":3,"hasAutograph":false},{"state":5,"hasAutograph":false},{"state":10,"hasAutograph":false}]}

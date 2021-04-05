@@ -1,4 +1,4 @@
-# Darea de seamă la Java: Lucrare de laborator nr. 2
+# Darea de seamă la Java: Lucrare de laborator nr. 3
 
 Tema: Mostenire in java. Clase abstracte si Interfete
 
