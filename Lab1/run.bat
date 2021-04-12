@@ -1,2 +1,2 @@
-javac Main.java Carte.java Helper.java
+javac Main.java DoubleMatrix.java Helper.java
 java Main
